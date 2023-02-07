@@ -16,11 +16,13 @@ const routes: Routes = [
 	{
 		path: 'auth',
 		component: AuthComponent,
-		canActivate: [LoggedinAuthGuard],
+		canActivate: [LoggedinAuthGuard]
 	},
 	{
 		path: 'forget-password',
 		component: ForgetPasswordComponent,
+		canActivate: [LoggedinAuthGuard]
+
 
 	},
 	{
