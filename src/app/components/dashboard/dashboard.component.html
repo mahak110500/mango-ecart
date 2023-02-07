@@ -1,1 +1,9 @@
-<p>dashboard works!</p>
+<div id="wrapper">
+    <app-sidebar></app-sidebar>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+            <app-header></app-header>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>
