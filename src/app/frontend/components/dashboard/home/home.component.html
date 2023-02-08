@@ -1,0 +1,158 @@
+
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+              </ol>
+            </div>
+  
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <div class="select-list">
+                  <form action="/action_page.php">
+                    <select name="cars">
+                      <option value="volvo">Volvo</option>
+                      <option value="saab">Saab</option>
+                      <option value="fiat" selected>Select any option.. </option>
+                      <option value="audi">Audi</option>
+                    </select>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="reload-btn">
+                  <a href="#" class="btn btn-sm btn-primary">Reload Data</a>
+                </div>
+              </div>
+              <!-- Area Chart -->
+              <div class="col-md-12">
+                <div class="card mb-4 py-3">
+                  <div class="card-header d-flex flex-row justify-content-between">
+                    <div class="life-time-heading">
+                      <h5 class="m-0 font-weight-bold text-primary">Life-Time sales</h5>
+                      <p>$ 993.02</p>
+                    </div>
+                    <div class="dropdown no-arrow">
+                      <h5 class="m-0 font-weight-bold text-primary">Average Order</h5>
+                      <p>$ 993.02</p>
+                    </div>
+  
+                  </div>
+                  <div class="value-sec">
+                    <div class="revenue">
+                      <h6>Revenue</h6>
+                      <p>$ 198.00</p>
+                    </div>
+                    <div class="tax">
+                      <h6>Tax</h6>
+                      <p>00</p>
+                    </div>
+                    <div class="Shipping">
+                      <h6>Shipping</h6>
+                      <p>00</p>
+                    </div>
+                    <div class="qua">
+                      <h6>Quantity</h6>
+                      <p>3</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                    <h5 class="m-0 font-weight-bold text-primary">Last orders</h5>
+                      <div class="more-btn">
+                        <a class="m-0  btn btn-primary btn-sm ml-2" href="#">Bestllselles</a>
+                        <a class="m-0  btn btn-primary btn-sm ml-2" href="#">Most View Product</a>
+                        <a class="m-0  btn btn-primary btn-sm ml-2" href="#">New Customers</a>
+                        <a class="m-0  btn btn-primary btn-sm ml-2" href="#">Customers</a>
+                        <a class="m-0  btn btn-primary btn-sm ml-2" href="#">Yotpo Reviews</a>
+                      </div>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>Customer Name</th>
+                          <th></th>
+                          <th>Items</th>
+                          <th></th>
+                          <th>Toltal</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><a href="#">Udin Wayang</a></td>
+                          <td></td>
+                          <td><span>5</span></td>
+                          <td></td>
+                          <td>$ 193.00</td>
+                        </tr>
+                        <tr>
+                          <td><a href="#">Jaenab Bajigur</a></td>
+                          <td></td>
+                          <td><span>4</span></td>
+                          <td></td>
+                          <td>$ 41.00</td> 
+                        </tr>
+                        <tr>
+                          <td><a href="#">Rivat Mahesa</a></td>
+                          <td></td>
+                          <td><span>2</span></td>
+                          <td></td>
+                          <td>$ 55.00</td>
+                        </tr>
+                        <tr>
+                          <td><a href="#">Indri Junanda</a></td>
+                          <td></td>
+                          <td><span>8</span></td>
+                          <td></td>
+                          <td>$ 00.00</td>
+                        </tr>
+                        <tr>
+                          <td><a href="#">Udin Cilok</a></td>
+                          <td></td>
+                          <td><span>3</span></td>
+                          <td></td>
+                          <td>$ 40.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="card-footer"></div>
+                </div>
+              </div>
+              <!-- Message From Customer-->
+              <div class="col-xl-4 col-lg-5 ">
+              </div>
+            </div>
+  
+            <!-- Modal Logout -->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout"
+              aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure you want to logout?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary Cancel" data-dismiss="modal">Cancel</button>
+                    <a href="login.html" class="btn btn-primary">Logout</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+          <!---Container Fluid-->

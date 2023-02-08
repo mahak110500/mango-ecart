@@ -35,11 +35,11 @@
 									<div class="form-group">
 										<div class="custom-control custom-checkbox small"
 											style="line-height: 1.5rem; display: block;">
-											<input type="checkbox" class="custom-control-input" id="customCheck">
+											<input type="checkbox" class="custom-control-input" id="customCheck" ngModel name="checkbox"  [(ngModel)]="rememberMe">
 											<label class="custom-control-label" for="customCheck">Remember
 												Me</label>
 										</div>
-									</div>
+									</div> 
 									<div class="form-group" style="text-align: center; ">
 										<button class="btn btn-primary btn-block btn-real" [disabled]="!loginForm.valid" style="width: 450px; background-color: rgb(247, 171, 30);">Login</button>
 									</div>

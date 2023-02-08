@@ -74,7 +74,8 @@ export class AuthService {
 	logout() {
 		localStorage.removeItem('token');
 		localStorage.removeItem('userData');
-		this.router.navigate(['auth']);
+		localStorage.removeItem('rememberMe');
+		this.router.navigate(['/admin/auth']);
 
 		//for autoLogout
 		if(this.tokenExpirationTimer){
@@ -107,18 +108,6 @@ export class AuthService {
 
 	}
 
-
-	// private handleAuthentication(email: string, userId: string, token: string) {
-	// 	console.log(email);
-
-	// 	const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
-	// 	const user = new User(email, userId, token, expirationDate);
-	// 	console.log(user);
-
-	// 	this.user.next(user);
-	// 	// this.autoLogout(expiresIn * 1000);
-	// 	localStorage.setItem('userData', JSON.stringify(user));
-	// }
 
 	getAuth() {
 		if (localStorage.getItem('token')) {

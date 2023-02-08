@@ -7,16 +7,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
   showMore = 'USER'
 	hidden: boolean;
 
 
-  constructor(private authService:AuthService) { }
+	constructor(private authService: AuthService) { }
 
-  ngOnInit(): void {
-  }
+	ngOnInit(): void {
+	}
 
-  toggle() {
+	toggle() {
 		this.hidden = !this.hidden;
 		if (this.hidden) {
 			this.showMore = 'show less'
@@ -27,8 +28,9 @@ export class HeaderComponent implements OnInit {
 		}
 	}
 
-  onLogout(){
-    this.authService.logout();
-  }
+	onLogout() {
+		this.authService.logout();
+	}
+
 
 }
