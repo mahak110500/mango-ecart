@@ -14,7 +14,7 @@ export class LoggedinAuthGuard implements CanActivate {
 		state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 			if (this.authService.getAuth()) {
-				this.router.navigate(['/dashboard/main-dashboard'])
+				this.router.navigate(['/admin/dashboard/main-dashboard'])
 				return false
 			} else {
 				return true

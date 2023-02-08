@@ -7,8 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 	{ path: '', redirectTo: '/frontend/dashboard/home', pathMatch: 'full' },
 
-	{path:'admin', loadChildren:()=>import('./admin/admin.module').then(mod=>mod.AdminModule)},
-	{path:'frontend', loadChildren:()=>import('./frontend/frontend.module').then(mod=>mod.FrontendModule)}
+	{path:'admin', loadChildren:()=>import('./modules/admin/admin.module').then(mod=>mod.AdminModule)},
+	{path:'frontend', loadChildren:()=>import('./modules/frontend/frontend.module').then(mod=>mod.FrontendModule)}
 
 ];
 
