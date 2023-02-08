@@ -18,21 +18,20 @@ export class AuthComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.rememberMe = false;
-		this.checkRememberMe();
+		// this.checkRememberMe(); 
 	}
 
 	onlogin(loginForm: NgForm) {
 		console.log(loginForm.value);
 
 
-		this.authService.login(loginForm.value.email, loginForm.value.password).subscribe((res) => {
+		this.authService.login(loginForm.value.email, loginForm.value.password, loginForm.value.checkbox).subscribe((res) => {
 			// console.log(res.result.token);
 			localStorage.setItem('token', JSON.stringify(res.result.token));
 			this.router.navigate(['/admin/dashboard/main-dashboard']);
 
 			if (this.rememberMe) {
 				console.log(this.rememberMe);
-				
 				localStorage.setItem('rememberMe', 'yes')
 			}
 			// if(loginForm.value.checkbox === true){
@@ -49,19 +48,19 @@ export class AuthComponent implements OnInit {
 		});
 	}
 
-	checkRememberMe(){
-		const accessTokenObj = localStorage.getItem("token");
-		const rememberMe = localStorage.getItem('rememberMe');
+	// checkRememberMe(){
+	// 	const accessTokenObj = localStorage.getItem("token");
+	// 	const rememberMe = localStorage.getItem('rememberMe');
 
-		console.log(accessTokenObj);
-		console.log(rememberMe);
+	// 	// console.log(accessTokenObj);
+	// 	// console.log(rememberMe);
 
-		if (accessTokenObj && rememberMe == 'yes') {
-			this.router.navigate(['/admin/dashboard/main-dashboard']);
-		  } else {
-			console.log("You need to login")
-		}
+	// 	if (accessTokenObj && rememberMe == 'yes') {
+	// 		this.router.navigate(['/admin/dashboard/main-dashboard']);
+	// 	  } else {
+	// 		// console.log("You need to login")
+	// 	}
 		
-	}
+	// }
 
 }
