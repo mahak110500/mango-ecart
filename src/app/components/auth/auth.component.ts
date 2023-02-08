@@ -10,6 +10,8 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class AuthComponent implements OnInit {
 	showError: boolean = false; //to display error
+	error:any;
+	
 	
 
 	constructor(private authService:AuthService,private router: Router) { }
@@ -20,19 +22,15 @@ export class AuthComponent implements OnInit {
 	onlogin(loginForm: NgForm) {
 		
 		this.authService.login(loginForm.value.email,loginForm.value.password).subscribe((res) => {
-			console.log(res);
+			// console.log(res.result.token);
+			localStorage.setItem('token', JSON.stringify(res.result.token));
+			this.router.navigate(['/dashboard/main-dashboard']);
 
-			if(res){
-				localStorage.setItem('token', JSON.stringify(res.result.token));
 
-				this.router.navigate(['/dashboard/main-dashboard']);
-
-			}else{
-				console.log('error');
-				this.showError = true;
-				
-			}
-		})
+		}, error=> {
+			console.log(error);
+			this.error = '**Invalid credentials';
+		});
 	}
 
 }

@@ -9,8 +9,8 @@
 								<div class="text-center">
 									<h1 class="h4 text-gray-900 mb-4">Login</h1>
 								</div>
-								<div *ngIf="showError" style="color: red;">
-									<p>*Invalid Credentials*</p>
+								<div  style="color: red;">
+									<p>{{error}}</p>
 								</div>
 
 								<form class="user" #loginForm="ngForm" (ngSubmit)="onlogin(loginForm)">
