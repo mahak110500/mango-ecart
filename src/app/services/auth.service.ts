@@ -42,8 +42,7 @@ export class AuthService {
 				resData.result.user.email,
 				resData.result.user.id,
 				resData.result.token,
-				+resData.expiresIn,
-				resData.rememberMe
+				+resData.expiresIn
 			);
 		})
 		);
@@ -66,7 +65,6 @@ export class AuthService {
 		const loadedUser = new User(
 			userData.email,
 			userData.id,
-			userData.rememberMe,
 			userData._token,
 			new Date(userData._tokenExpirationDate)
 		);
@@ -107,7 +105,7 @@ export class AuthService {
 	}
 
 
-	private handleAuthentication(email: string, userId: string, token: string, expiresIn: number, rememberMe: boolean) {
+	private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
 
 		const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
 		// console.log(expirationDate); //time after which user has to be auto logged out
@@ -122,11 +120,9 @@ export class AuthService {
 		const user = new User(
 			email,
 			userId,
-			rememberMe,
 			token,
 			new Date(expirationDuration)
 		);
-		console.log(user);
 
 		this.user.next(user); //storing data in user subject
 
@@ -162,8 +158,6 @@ export class AuthService {
 
 	getResetPassword(formData){
 		this.authForm = formData;
-		console.log(formData);
-		
 
 		return this.http.post<Authdata>(`http://103.127.29.85:3006/api/admin-auth/reset-password`,formData
 			

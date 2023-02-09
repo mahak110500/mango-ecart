@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit {
 		this.activeRoute.queryParams
 			.subscribe((res) => {
 				this.accessToken = res;
-				console.log(this.accessToken);
+				// console.log(this.accessToken);
 				this.authFormGroup.patchValue({
 					token: this.accessToken.token
 				})
@@ -47,10 +47,8 @@ export class ResetPasswordComponent implements OnInit {
 
 	onSubmit(authFormGroup) {
 		this.authData = authFormGroup.value;
-		console.log(this.authData);
 
 		this.authService.getResetPassword({ password: this.authData.password, token: this.authData.token }).subscribe((res) => {
-			console.log(res);
 			window.alert('Password changed successfully')
 
 			this.router.navigate(['/admin/auth']);

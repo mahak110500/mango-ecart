@@ -20,8 +20,6 @@ export class AuthComponent implements OnInit {
 	}
 
 	onlogin(loginForm: NgForm) {
-		console.log(loginForm.value);
-
 
 		this.authService.login(loginForm.value.email, loginForm.value.password, loginForm.value.checkbox).subscribe((res) => {
 			// console.log(res.result.token);
