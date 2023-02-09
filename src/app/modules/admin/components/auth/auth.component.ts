@@ -27,17 +27,24 @@ export class AuthComponent implements OnInit {
 
 		this.authService.login(loginForm.value.email, loginForm.value.password, loginForm.value.checkbox).subscribe((res) => {
 			// console.log(res.result.token);
+			
 			localStorage.setItem('token', JSON.stringify(res.result.token));
 			this.router.navigate(['/admin/dashboard/main-dashboard']);
 
-			if (this.rememberMe) {
-				console.log(this.rememberMe);
-				localStorage.setItem('rememberMe', 'yes')
-			}
+		
 			// if(loginForm.value.checkbox === true){
 			// 	this.authService.tokenExpirationTimer = null;
 			// 	console.log(this.authService.tokenExpirationTimer);
 
+			// }
+
+			// const accessTokenObj = localStorage.getItem("token");
+			// const is_rememberMe = localStorage.getItem('rememberMe');
+			// console.log(accessTokenObj);
+			// console.log(is_rememberMe);
+
+			// if(accessTokenObj && is_rememberMe){
+			// 	this.authService.autoLogout(expirationDuration: number);
 			// }
 
 

@@ -11,8 +11,8 @@ export interface Authdata {
 	password: string;
 	id: string;
 	token: string;
-    expiresIn: string;
-	rememberMe :boolean;
+	expiresIn: string;
+	rememberMe: boolean;
 
 }
 
@@ -24,20 +24,20 @@ export class AuthService {
 	user = new BehaviorSubject<User>(null)
 	tokenExpirationTimer: any;
 
-	constructor(private http: HttpClient, private router: Router) { }	
+	constructor(private http: HttpClient, private router: Router) { }
 
-	login(email: string, password: string, rememberMe:boolean) {
-		console.log(rememberMe);
-		if(rememberMe){
-			this.autoLogin();
-			
+	login(email: string, password: string, rememberMe: boolean) {
+		// console.log(rememberMe);
+
+		if (rememberMe) {
+			console.log(rememberMe);
+			localStorage.setItem('rememberMe', 'yes')
 		}
-		
+
 		return this.http.post<Authdata>(`http://103.127.29.85:3006/api/admin-auth/login`,
 			{ email, password }
 		).pipe(tap(resData => {
 			console.log(resData);
-			
 
 			this.handleAuthentication(
 				resData.result.user.email,
@@ -51,41 +51,38 @@ export class AuthService {
 	}
 
 	autoLogin() {
-        let loggedinUser: any = localStorage.getItem('userData');
+		let loggedinUser: any = localStorage.getItem('userData');
 
-        const userData: {
+		const userData: {
 			rememberMe: boolean;
-            email: string;
-            id: string;
-            _token: string;
-			_tokenExpirationDate:string;
-        } = JSON.parse(loggedinUser);
-        
-		// console.log(userData);
-		
-        if (!userData) {
-            return;
-        }
-        const loadedUser = new User(
-            userData.email,
-            userData.id,
-            userData.rememberMe,
-            userData._token,
-			new Date(userData._tokenExpirationDate)
-        );
+			email: string;
+			id: string;
+			_token: string;
+			_tokenExpirationDate: string;
+		} = JSON.parse(loggedinUser);
 
-		if(loadedUser.token){
+		if (!userData) {
+			return;
+		}
+		const loadedUser = new User(
+			userData.email,
+			userData.id,
+			userData.rememberMe,
+			userData._token,
+			new Date(userData._tokenExpirationDate)
+		);
+
+		if (loadedUser.token) {
 			this.user.next(loadedUser);
 
 			const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
-
-			if(this.tokenExpirationTimer > 0){
-
-				this.autoLogout(expirationDuration);
-			}
+		
+			// if (this.tokenExpirationTimer > 0) {
+			// 	this.autoLogout(expirationDuration);
+			// }
 		}
 
-    }
+	}
 
 	logout() {
 		localStorage.removeItem('token');
@@ -95,43 +92,32 @@ export class AuthService {
 
 
 		//for autoLogout
-		if(this.tokenExpirationTimer){
+		if (this.tokenExpirationTimer) {
 			clearTimeout(this.tokenExpirationTimer);
 		}
 		this.tokenExpirationTimer = null;
 
 	}
 
-	autoLogout(expirationDuration:number){
+	autoLogout(expirationDuration: number) {
+		console.log(expirationDuration);
 
-		const accessTokenObj = localStorage.getItem("token");
-		const rememberMe = localStorage.getItem('rememberMe');
+		this.tokenExpirationTimer = setTimeout(() => {
+			this.logout();
+		}, 3000);
 
-		if (accessTokenObj && rememberMe == 'yes'){
-			 this.router.navigate(['/admin/dashboard/main-dashboard']);
-
-		} else{
-			this.tokenExpirationTimer = setTimeout(() => {
-				this.logout();
-			}, 3000);
-		}
-		
 	}
 
 
-	private handleAuthentication(email: string, userId: string, token: string,expiresIn: number, rememberMe:boolean) {
-		console.log(rememberMe);
-		
+	private handleAuthentication(email: string, userId: string, token: string, expiresIn: number, rememberMe: boolean) {
 
-        const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
+		const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
 		// console.log(expirationDate); //time after which user has to be auto logged out
-		
+
 		var d = expirationDate.toString();
-		var index = d.lastIndexOf(':') +3;
-		// console.log(d.substring(0, index));
+		var index = d.lastIndexOf(':') + 3;
 
 		var expiringDate = d.substring(0, index);
-		// console.log(expiringDate);
 
 		const expirationDuration = new Date(expiringDate).getTime() - new Date().getTime();
 
@@ -143,11 +129,23 @@ export class AuthService {
 			new Date(expirationDuration)
 		);
 		console.log(user);
-		
+
 		this.user.next(user); //storing data in user subject
 
-		this.autoLogout(3600*1000)
+		// this.autoLogout(3600 * 1000)
 		localStorage.setItem('userData', JSON.stringify(user));
+
+		// this.autoLogout(expirationDuration);
+		const is_rememberMe = localStorage.getItem('rememberMe');
+		console.log(is_rememberMe);
+
+		if(is_rememberMe != null){
+			 return;
+
+		}else{
+			 this.autoLogout(expirationDuration);
+		}
+
 
 	}
 
@@ -161,7 +159,7 @@ export class AuthService {
 	}
 
 
-	checkRememberMe(){
+	checkRememberMe() {
 		const accessTokenObj = localStorage.getItem("token");
 		const rememberMe = localStorage.getItem('rememberMe');
 
@@ -172,10 +170,10 @@ export class AuthService {
 
 
 			// this.router.navigate(['/admin/dashboard/main-dashboard']);
-		  } else {
+		} else {
 			// console.log("You need to login")
 		}
-		
+
 	}
-	
+
 }
