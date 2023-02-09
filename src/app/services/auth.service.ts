@@ -30,7 +30,6 @@ export class AuthService {
 	login(email: string, password: string, rememberMe: boolean) {
 
 		if (rememberMe) {
-			console.log(rememberMe);
 			localStorage.setItem('rememberMe', 'yes')
 		}
 
@@ -166,7 +165,7 @@ export class AuthService {
 		console.log(formData);
 		
 
-		return this.http.post<Authdata>(`http://103.127.29.85:3006/api/admin-auth/forgot-password`,formData
+		return this.http.post<Authdata>(`http://103.127.29.85:3006/api/admin-auth/reset-password`,formData
 			
 		)
 	}

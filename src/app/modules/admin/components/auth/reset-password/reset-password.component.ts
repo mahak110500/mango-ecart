@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, NgForm, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { ConfirmedValidator } from './confirmed.validator';
+import { ConfirmPasswordValidator } from './confirmed.validator';
 
 @Component({
 	selector: 'app-reset-password',
@@ -16,11 +16,11 @@ export class ResetPasswordComponent implements OnInit {
 	accessToken: any;
 
 	constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private activeRoute: ActivatedRoute) {
-		
+
 	}
 
 	ngOnInit(): void {
-		
+
 
 		this.authFormGroup = this.fb.group({
 
@@ -29,9 +29,9 @@ export class ResetPasswordComponent implements OnInit {
 			token: ['']
 
 		},
-			// {
-			// 	validator: ConfirmedValidator('password', 'confirm_password')
-			// }
+		{
+			validator: ConfirmPasswordValidator("password", "confirmPassword")
+		}
 		)
 
 		this.activeRoute.queryParams
@@ -44,24 +44,20 @@ export class ResetPasswordComponent implements OnInit {
 			});
 	}
 
-	// get f(){
-	// 	return this.authFormGroup.controls;
-	//   }
-
-
 
 	onSubmit(authFormGroup) {
 		this.authData = authFormGroup.value;
 		console.log(this.authData);
 
-		this.authService.getResetPassword({password:this.authData.password,token:this.authData.token}).subscribe((res) => {
+		this.authService.getResetPassword({ password: this.authData.password, token: this.authData.token }).subscribe((res) => {
 			console.log(res);
+			window.alert('Password changed successfully')
 
 			this.router.navigate(['/admin/auth']);
 
 		}, error => {
 			console.log(error);
-			this.error = "*Something went wrong"
+			this.error = error.error.message
 
 		})
 
