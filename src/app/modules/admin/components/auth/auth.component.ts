@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
 	styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-	showError: boolean = false; //to display error
 	error: any;
 	rememberMe: boolean;
 
@@ -18,7 +17,6 @@ export class AuthComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.rememberMe = false;
-		// this.checkRememberMe(); 
 	}
 
 	onlogin(loginForm: NgForm) {
@@ -30,23 +28,6 @@ export class AuthComponent implements OnInit {
 			
 			localStorage.setItem('token', JSON.stringify(res.result.token));
 			this.router.navigate(['/admin/dashboard/main-dashboard']);
-
-		
-			// if(loginForm.value.checkbox === true){
-			// 	this.authService.tokenExpirationTimer = null;
-			// 	console.log(this.authService.tokenExpirationTimer);
-
-			// }
-
-			// const accessTokenObj = localStorage.getItem("token");
-			// const is_rememberMe = localStorage.getItem('rememberMe');
-			// console.log(accessTokenObj);
-			// console.log(is_rememberMe);
-
-			// if(accessTokenObj && is_rememberMe){
-			// 	this.authService.autoLogout(expirationDuration: number);
-			// }
-
 
 
 		}, error => {

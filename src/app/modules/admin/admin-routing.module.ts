@@ -4,6 +4,7 @@ import { AuthGuardGuard } from 'src/app/guards/auth.guard';
 import { LoggedinAuthGuard } from 'src/app/guards/loggedin-auth.guard';
 import { AuthComponent } from './components/auth/auth.component';
 import { ForgetPasswordComponent } from './components/auth/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import { AtributesComponent } from './components/dashboard/atributes/atributes.component';
 import { BrandComponent } from './components/dashboard/brand/brand.component';
 import { CategoryComponent } from './components/dashboard/category/category.component';
@@ -22,6 +23,11 @@ const routes: Routes = [
 	{
 		path: 'forget-password',
 		component: ForgetPasswordComponent,
+		canActivate: [LoggedinAuthGuard]
+	},
+	{
+		path: 'reset-password',
+		component: ResetPasswordComponent,
 		canActivate: [LoggedinAuthGuard]
 	},
 	{

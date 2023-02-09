@@ -11,8 +11,8 @@
 								</div>
 								<div  style="color: red;">
 									<p>{{error}}</p>
-								</div>
-
+								</div> 
+ 
 								<form class="user" #loginForm="ngForm" (ngSubmit)="onlogin(loginForm)">
 									<div class="form-group">
 										<input class="form-control" id="exampleInputEmail" type="email" placeholder="Enter email address" ngModel name="email" required email
@@ -46,11 +46,11 @@
 								</form><br>
 								
 								<div class="text-center">
-									<a class="font-weight-bold small" routerLink="/forget-password">Forgot Password?</a>
+									<a class="font-weight-bold small" routerLink="/admin/forget-password">Forgot Password?</a>
 								</div>
-								<div class="text-center">
+								<!-- <div class="text-center">
 									<a class="font-weight-bold small" >Create an Account!</a>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject, tap } from 'rxjs';
 import { User } from '../models/user.model';
@@ -23,11 +23,11 @@ export interface Authdata {
 export class AuthService {
 	user = new BehaviorSubject<User>(null)
 	tokenExpirationTimer: any;
+	authForm:any;
 
 	constructor(private http: HttpClient, private router: Router) { }
 
 	login(email: string, password: string, rememberMe: boolean) {
-		// console.log(rememberMe);
 
 		if (rememberMe) {
 			console.log(rememberMe);
@@ -90,7 +90,6 @@ export class AuthService {
 		localStorage.removeItem('rememberMe');
 		this.router.navigate(['/admin/auth']);
 
-
 		//for autoLogout
 		if (this.tokenExpirationTimer) {
 			clearTimeout(this.tokenExpirationTimer);
@@ -104,7 +103,7 @@ export class AuthService {
 
 		this.tokenExpirationTimer = setTimeout(() => {
 			this.logout();
-		}, 3000);
+		}, expirationDuration);
 
 	}
 
@@ -135,7 +134,6 @@ export class AuthService {
 		// this.autoLogout(3600 * 1000)
 		localStorage.setItem('userData', JSON.stringify(user));
 
-		// this.autoLogout(expirationDuration);
 		const is_rememberMe = localStorage.getItem('rememberMe');
 		console.log(is_rememberMe);
 
@@ -145,7 +143,6 @@ export class AuthService {
 		}else{
 			 this.autoLogout(expirationDuration);
 		}
-
 
 	}
 
@@ -158,22 +155,20 @@ export class AuthService {
 		}
 	}
 
+	getForgetPassword(email:string){
+		return this.http.post<Authdata>(`http://103.127.29.85:3006/api/admin-auth/forgot-password`,
+			{ email }
+		)
+	}
 
-	checkRememberMe() {
-		const accessTokenObj = localStorage.getItem("token");
-		const rememberMe = localStorage.getItem('rememberMe');
+	getResetPassword(formData){
+		this.authForm = formData;
+		console.log(formData);
+		
 
-		// console.log(accessTokenObj);
-		// console.log(rememberMe);
-
-		if (accessTokenObj && rememberMe == 'yes') {
-
-
-			// this.router.navigate(['/admin/dashboard/main-dashboard']);
-		} else {
-			// console.log("You need to login")
-		}
-
+		return this.http.post<Authdata>(`http://103.127.29.85:3006/api/admin-auth/forgot-password`,formData
+			
+		)
 	}
 
 }
