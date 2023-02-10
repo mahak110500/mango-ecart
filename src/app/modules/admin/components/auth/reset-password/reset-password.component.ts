@@ -15,12 +15,9 @@ export class ResetPasswordComponent implements OnInit {
 	authData: any;
 	accessToken: any;
 
-	constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private activeRoute: ActivatedRoute) {
-
-	}
+	constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private activeRoute: ActivatedRoute) {}
 
 	ngOnInit(): void {
-
 
 		this.authFormGroup = this.fb.group({
 
@@ -29,9 +26,9 @@ export class ResetPasswordComponent implements OnInit {
 			token: ['']
 
 		},
-		{
-			validator: ConfirmPasswordValidator("password", "confirmPassword")
-		}
+			{
+				validator: ConfirmPasswordValidator("password", "confirmPassword")
+			}
 		)
 
 		this.activeRoute.queryParams
@@ -58,7 +55,5 @@ export class ResetPasswordComponent implements OnInit {
 			this.error = error.error.message
 
 		})
-
-
 	}
 }
